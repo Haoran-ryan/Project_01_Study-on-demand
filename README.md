@@ -9,7 +9,8 @@
 
 ## Features 
 1. 2 portals for students and lecturers 
-2. API for avatar picture auto-creation 
+2. API for avatar picture auto-creation
+3. API for teams / zoom meetings  
 
 # Development 
 
@@ -42,46 +43,71 @@
 
     ```
 * Database initialization
-## Data Association 
-1. 1:M Students and Enrolments
-- `student.rb` 
-    ```ruby 
-    class Student < ApplicationRecord
-        has_many :enrolments
-    end
-    ```
-- `erolment.rb`
-  ```ruby
-    class Enrolment < ApplicationRecord
-        belongs_to :students, :optional => true 
-    end
-
-  ```
-2. 1:M Enrolments and Courses 
-- `enrolment.rb`
+* Data Association 
+  1. 1:M Students and Enrolments
+  - `student.rb` 
+      ```ruby 
+      class Student < ApplicationRecord
+          has_many :enrolments
+      end
+      ```
+  - `erolment.rb`
     ```ruby
-        class Enrolment < ApplicationRecord
-            belongs_to :students, :optional => true 
-            belongs_to :course, :optional => true 
-        end
+      class Enrolment < ApplicationRecord
+          belongs_to :students, :optional => true 
+      end
+
     ```
-- `course.rb`
-  ```ruby
-    class Course < ApplicationRecord
-        has_many :enrolments
-    end
-  ```
-3. M:M Lecturers and Courses 
-- `course.rb`
-  ```ruby
-    class Course < ApplicationRecord
-        has_many :enrolments
-        has_and_belongs_to_many :lecturers
-    end
-  ```
-- `lecturer.rb`
-  ```ruby
-    class Lecturer < ApplicationRecord
-        has_and_belongs_to_many :courses
-    end
-  ```
+  2. 1:M Enrolments and Courses 
+  - `enrolment.rb`
+      ```ruby
+          class Enrolment < ApplicationRecord
+              belongs_to :students, :optional => true 
+              belongs_to :course, :optional => true 
+          end
+      ```
+  - `course.rb`
+    ```ruby
+      class Course < ApplicationRecord
+          has_many :enrolments
+      end
+    ```
+  3. M:M Lecturers and Courses 
+  - `course.rb`
+    ```ruby
+      class Course < ApplicationRecord
+          has_many :enrolments
+          has_and_belongs_to_many :lecturers
+      end
+    ```
+  - `lecturer.rb`
+    ```ruby
+      class Lecturer < ApplicationRecord
+          has_and_belongs_to_many :courses
+      end
+    ```
+* Seed Sample Data 
+    ```shell
+    rails db:seed 
+    ```
+
+# Prolems and Fixes 
+1. Issue 1 : incorrect FK in Courses table 
+   ```shell
+    rails generate migration add_course_id_to_enrolments course_id:integer
+    rails db:migrate 
+   ```
+2. Issue 2: incorrect associations 
+   ```ruby
+    puts "Students and Enrolments"
+    s1.enrolments << e1 << e2
+    s2.enrolments << e3 << e4
+    puts "Done 1"
+
+    puts "Enrolments and Courses"
+    c1.enrolments << e1
+    c2.enrolments << e2
+    c3.enrolments << e3
+    c4.enrolments << e4
+    puts "Done 2"
+   ```
