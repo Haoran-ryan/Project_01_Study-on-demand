@@ -11,18 +11,10 @@
 1. 2 portals for students and lecturers 
 2. API for avatar picture auto-creation 
 
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
+# Development 
 
 * Ruby version
   This project is built on *ruby 2.7.7p221 (2022-11-24 revision 168ec2b1e5) [arm64-darwin22]*. 
-
-* System dependencies
-
-* Configuration
 
 * Database creation
     ```shell
@@ -50,11 +42,46 @@ Things you may want to cover:
 
     ```
 * Database initialization
+## Data Association 
+1. 1:M Students and Enrolments
+- `student.rb` 
+    ```ruby 
+    class Student < ApplicationRecord
+        has_many :enrolments
+    end
+    ```
+- `erolment.rb`
+  ```ruby
+    class Enrolment < ApplicationRecord
+        belongs_to :students, :optional => true 
+    end
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+  ```
+2. 1:M Enrolments and Courses 
+- `enrolment.rb`
+    ```ruby
+        class Enrolment < ApplicationRecord
+            belongs_to :students, :optional => true 
+            belongs_to :course, :optional => true 
+        end
+    ```
+- `course.rb`
+  ```ruby
+    class Course < ApplicationRecord
+        has_many :enrolments
+    end
+  ```
+3. M:M Lecturers and Courses 
+- `course.rb`
+  ```ruby
+    class Course < ApplicationRecord
+        has_many :enrolments
+        has_and_belongs_to_many :lecturers
+    end
+  ```
+- `lecturer.rb`
+  ```ruby
+    class Lecturer < ApplicationRecord
+        has_and_belongs_to_many :courses
+    end
+  ```
