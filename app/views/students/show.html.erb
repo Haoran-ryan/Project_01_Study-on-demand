@@ -11,4 +11,6 @@
         <li><%= enrolment%></li>
         <% end %>
     </li>
+    <button><%= link_to "Edit", edit_student_path %></button>
+    <%= button_to "Delete Student", @student, :method =>"delete", :data=> {:confirm => "Are you sure you want to delete #{@student.name}?"} %>
 </ul>

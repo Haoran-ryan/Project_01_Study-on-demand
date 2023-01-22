@@ -1,0 +1,16 @@
+<h1><%= @lecturer.name %></h1>
+
+<%= image_tag @lecturer.image, :class => 'feature' if @lecturer.image.present? %>
+
+<ul>
+    <li>Name: <%= @lecturer.name %></li>
+    <li>Email: <%= @lecturer.email %></li>
+    
+    <li>Courses:
+        <% @lecturer.courses.each do |course| %>
+        <li><%= course%></li>
+        <% end %>
+    </li>
+    <button><%= link_to "Edit", edit_lecturer_path %></button>
+    <%= button_to "Delete Lecturer", @lecturer, :method =>"delete", :data=> {:confirm => "Are you sure you want to delete #{@lecturer.name}?"} %>
+</ul>

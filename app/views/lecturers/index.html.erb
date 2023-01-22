@@ -1,0 +1,11 @@
+<h1>All Lecturers</h1>
+
+<% @lecturers.each do |lecturer|%>
+    <p>
+        <%= image_tag lecturer.image, :class =>'thumb lecturer_image' if lecturer.image.present? %>
+        <ul>
+            <li>Name: <%= link_to lecturer.name, lecturer %></li>
+            <li>Email: <%= lecturer.email %></li>
+        </ul>
+    </p>
+<% end %>
