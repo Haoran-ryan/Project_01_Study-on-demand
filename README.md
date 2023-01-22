@@ -1,6 +1,6 @@
 # README
 
-# Design log 
+# Design 
 
 ## Schema 
 ![schema](app/assets/images/schema.png)
@@ -12,8 +12,8 @@
 2. API for avatar picture auto-creation
 3. API for teams / zoom meetings  
 
-# Development 
-
+# Development Log 
+## 20-01-2023
 * Ruby version
   This project is built on *ruby 2.7.7p221 (2022-11-24 revision 168ec2b1e5) [arm64-darwin22]*. 
 
@@ -91,7 +91,9 @@
     rails db:seed 
     ```
 
-# Prolems and Fixes 
+
+
+### Prolems and Fixes 
 1. Issue 1 : incorrect FK in Courses table 
    ```shell
     rails generate migration add_course_id_to_enrolments course_id:integer
@@ -111,3 +113,30 @@
     c4.enrolments << e4
     puts "Done 2"
    ```
+
+## 21-01-2023
+* Home Page creation
+  ```shell 
+    rails g controller Pages index --skip-routes
+  ```
+  `index.html.erb` and `pages_controller.rb` updates 
+
+* `Students` controller and views createion 
+  ```shell
+    rails g controller Students index show new edit --skip-routes 
+  ```
+## 22-01-2023
+`students` 
+- `index` 
+  - `index` action defined in `studnet_controller.rb` 
+  - `index.html.erb`
+- `show` 
+  - link_to set up for each student on index page 
+  - `show.html.erb`
+  - `show` action defined in the controller 
+
+`application.html.erb` 
+- `nav` bar added: `new studnet` & `all students`
+
+### Problems and Fixes 
+- How to display the courses a student enrols in? The courses table is indirectly connected to the students via the enrolments table. 

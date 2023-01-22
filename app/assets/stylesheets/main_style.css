@@ -1,0 +1,8 @@
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.thumb, .feature {
+    height: 10em; 
+}

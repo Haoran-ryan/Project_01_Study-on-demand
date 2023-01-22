@@ -10,6 +10,15 @@
   </head>
 
   <body>
-    <%= yield %>
+  <div class="container">
+    <nav>
+      <%= link_to "Home", pages_home_path %>
+      |
+      <%= link_to "All Students", students_path %>
+      |
+      <%= link_to "New Student",  new_student_path %>
+    </nav>
+     <%= yield %>
+  </div>
   </body>
 </html>

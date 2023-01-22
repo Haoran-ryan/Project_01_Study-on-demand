@@ -1,0 +1,14 @@
+<h1><%= @student.name %></h1>
+
+<%= image_tag @student.image, :class => 'feature' if @student.image.present? %>
+
+<ul>
+    <li>Name: <%= @student.name %></li>
+    <li>Email: <%= @student.email %></li>
+    
+    <li>Enrolments:
+        <% @student.enrolments.each do |enrolment| %>
+        <li><%= enrolment%></li>
+        <% end %>
+    </li>
+</ul>
