@@ -134,9 +134,16 @@
   - link_to set up for each student on index page 
   - `show.html.erb`
   - `show` action defined in the controller 
+-`new`
+  - define the `new` action in the controller 
+  - create a partial `_form.html.erb` 
 
 `application.html.erb` 
 - `nav` bar added: `new studnet` & `all students`
 
+
 ### Problems and Fixes 
 - How to display the courses a student enrols in? The courses table is indirectly connected to the students via the enrolments table. 
+  ```ruby
+  # convert the db from sqlite to postgresql
+  ```
