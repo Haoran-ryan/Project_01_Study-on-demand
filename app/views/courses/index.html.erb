@@ -1,0 +1,12 @@
+<h1>All Courses</h1>
+
+<% @courses.each do |course|%>
+    <p>
+        <%= image_tag course.image, :class =>'thumb course_image' if course.image.present? %>
+        <ul>
+            <li>Course: <%= link_to course.name, course %></li>
+            <li>Introduction: <%= course.intro %></li>
+        </ul>
+    </p>
+<% end %>
+

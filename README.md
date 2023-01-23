@@ -184,6 +184,35 @@
  - `destroy`
    - define the `destroy` action in the controller 
    - set up `delete` button in the show page 
+* `courses` 
+- `courses` controller and views created 
+  ```shell
+    rails g controller Courses index show new edit --skip-routes
+  ```
+- routes set up
+- navigation bar added to all pages 
+
+* `courses`
+  - `index`
+    - define the `index` action in the controller
+    - `index.html.erb` edited
+  - `show`
+    - define the `show` action in the controller
+    - `show.hmtl.erb` edited
+  - `new`
+    - define the `new` action in the controller
+    - create a partial `_form.html.erb` for `courses`
+    - `new.html.erb` edited
+  - `create`
+    - define the `create` action in the controller 
+  - `edit` 
+    - define the `edit` action in the controller
+    - `edit.hmtl.erb` edited 
+  - `update`
+    - define the `update` action in the controller
+  - `destroy`
+    - define the `destroy` action in the controller
+    - set up the `delete` button in the show page 
 
 ### Problems and Fixes 
 - `password` added to the forms of `students` and `lecturers`
