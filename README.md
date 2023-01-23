@@ -5,7 +5,7 @@
 ## Schema 
 ![schema](app/assets/images/schema.png)
 ## Website flowchart 
-![website flowchart](/study-on-demand/app/assets/images/flow_chat.png)
+![website flowchart](app/assets/images/flow_chat.png)
 
 ## Features 
 1. 2 portals for students and lecturers 
@@ -184,6 +184,8 @@
  - `destroy`
    - define the `destroy` action in the controller 
    - set up `delete` button in the show page 
+
+
 * `courses` 
 - `courses` controller and views created 
   ```shell
@@ -192,7 +194,6 @@
 - routes set up
 - navigation bar added to all pages 
 
-* `courses`
   - `index`
     - define the `index` action in the controller
     - `index.html.erb` edited
