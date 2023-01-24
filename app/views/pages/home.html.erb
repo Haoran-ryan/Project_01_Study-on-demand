@@ -3,6 +3,10 @@
     <p>Welcome back <%=@current_student.name%> </p>
 <% end %>
 
+<% if @current_lecturer.present? %>
+    <p>Welcome back <%=@current_lecturer.name%> </p>
+<% end %>
+
 <p>2 Entery portals would be set up </p>
 <p>One for Student</p>
 <p>The other for lecturer</p>

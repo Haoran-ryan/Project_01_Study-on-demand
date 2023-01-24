@@ -14,8 +14,7 @@
     <nav>
     <%= link_to "Home", pages_home_path %>
       |
-
-    <% if @current_student.present?%>
+    <% if @current_student.present? || @current_lecturer.present? %>
       <%= link_to "Sign Out", login_path, :method => 'delete' %>
         |
     <% else %>
@@ -23,15 +22,14 @@
         |
         <%= link_to "Sign Up for Student", new_student_path %>
         |
+        <%= link_to "Sign Up for Lecturer", new_lecturer_path %>
+        |
     <% end %>
       
       <%= link_to "All Students", students_path %>
       |
-      <%= link_to "New Student", new_student_path %>
-      |
       <%= link_to "All Lecturers", lecturers_path %>
-      |
-      <%= link_to "New Lecturer", new_lecturer_path %>
+  
       |
       <%= link_to "All Courses", courses_path %>
       |

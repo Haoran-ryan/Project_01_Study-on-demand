@@ -158,8 +158,10 @@
 
 
 ### Problems and Fixes 
-- How to display the courses a student enrols in? The courses table is indirectly connected to the students via the enrolments table. [AWATITING]
-
+- How to display the courses a student enrols in? The courses table is indirectly connected to the students via the enrolments table. [FIXED]
+  ```
+    enrolment.course.name 
+  ```
 
 - Move the database from Sqlite3 to PostgreSQL [FIXED]
   credits to: https://medium.com/@virtual_khan/converting-rails-from-sqlite3-to-postgresql-d97023314a14
@@ -238,7 +240,7 @@
   - `session_controller` set up for the student to log in 
 
 ### Problems and Fixes 
-- `password` added to the forms of `students` and `lecturers`
+- `password` added to the forms of `students` and `lecturers` [FIXED]
 - Add password authentication to `update` [FIXED]
 - `admin` added to the forms of `lecturers`
 - Display `enrolment` and `courses` for `students`
@@ -256,11 +258,26 @@
   - remove `sign up` option when a student successfully signs in 
   - auto `sign in` once a new `sign up` is successfully signed performed 
 
+- ~ update the authentication conditions for `students` 
+  ```ruby
+    :email, :uniqueness => true, :presence => true
+  ```
+
+* `lecturers`
+- `lecturer_controller` : copy and paste the controller from `student_controller.rb`
+- `authenticate` set up for `lecturers` 
+  ```shell
+    rails g migration add_password_digest_to_lecturers password_digest:string
+    rails db:migrate
+  ```
+- `lecturer.rb` : password and authentication 
+- `session` for `lecturers`
+  - 
 
 ### Problems and Fixes
-- customized welcome message is not showing in the homepage for `session[:stduent_id]`
+- customized welcome message is not showing in the homepage for `session[:stduent_id]` [FIXED]
   - 1. typo of the action 
   - 2. the action must be defined in `application_controller.rb`
 
-- error message is not shown for invalid signin 
+- error message is not shown for invalid signin [FIXED]
   - `flash[:error]` shall be called in the session new view 

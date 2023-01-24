@@ -8,7 +8,7 @@
     
     <li>Enrolments:
         <% @student.enrolments.each do |enrolment| %>
-        <li><%= enrolment%></li>
+        <li><%= enrolment.course.name %></li>
         <% end %>
     </li>
     <button><%= link_to "Edit", edit_student_path %></button>
