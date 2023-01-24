@@ -1,3 +1,13 @@
+<% if @student.errors.any? %>
+    <ol>
+        <% @student.errors.full_messages.each do |msg| %>
+            <li>
+                <%= msg %>
+            </li>
+        <% end %>
+    </ol>
+<% end %>
+
 <%= form_for @student do |f| %>
     <%=f.label :name, "Name" %>
     <%= f.text_field :name %>
@@ -7,6 +17,12 @@
 
     <%= f.label :image %>
     <%= f.url_field :image %>
+
+    <%= f.label :password  %>
+    <%= f.password_field :password %>
+
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
 
     <br />
     <%= f.submit %>

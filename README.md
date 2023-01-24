@@ -215,8 +215,52 @@
     - define the `destroy` action in the controller
     - set up the `delete` button in the show page 
 
+* set up `password` authentication for `students`
+  - command 
+    ``` shell
+      rails g migration add_password_digest_to_students password_digest:string
+
+      rails db:migrate
+    ```
+  - turn on the password authentication in `Gemfile` and install `bundle`
+  - add `has_secure_password` to `student.rb` model 
+  - add password authentication and error messages to `_form.html.erb` for `students`
+  - add password authentication to `create` in the controller
+
+* set up `sessions` for login purpose for `students`
+  - update the routes 
+  - generation `session` 
+    ```shell 
+      rails g controller Session --skip-routes
+    ```
+  - update the home page `application.html.erb`
+  - create `new.html.erb` in `session` for `students`
+  - `session_controller` set up for the student to log in 
+
 ### Problems and Fixes 
 - `password` added to the forms of `students` and `lecturers`
+- Add password authentication to `update` [FIXED]
 - `admin` added to the forms of `lecturers`
 - Display `enrolment` and `courses` for `students`
-- display `courses` for `lecturers` 
+- Display `courses` for `lecturers` 
+
+
+## 24-01-2023
+* `sign in` for `students`
+  - homepage info for a successful login session 
+    - a private action defined in to fect student in `application_controller.rb` 
+    - `before_action :fecth_student` is placed in `student_controller.rb`
+* `sign out` for `students` 
+  - `application.html.erb` : nav bar added 
+  - define `destroy` action in `session_controller` for `students`
+  - remove `sign up` option when a student successfully signs in 
+  - auto `sign in` once a new `sign up` is successfully signed performed 
+
+
+### Problems and Fixes
+- customized welcome message is not showing in the homepage for `session[:stduent_id]`
+  - 1. typo of the action 
+  - 2. the action must be defined in `application_controller.rb`
+
+- error message is not shown for invalid signin 
+  - `flash[:error]` shall be called in the session new view 

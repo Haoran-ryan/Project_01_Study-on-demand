@@ -1,6 +1,7 @@
-<h1>Pages#index</h1>
-
-<h2> This is the home page </h2>
+<h1>Home Page</h1>
+<% if @current_student.present? %>
+    <p>Welcome back <%=@current_student.name%> </p>
+<% end %>
 
 <p>2 Entery portals would be set up </p>
 <p>One for Student</p>
