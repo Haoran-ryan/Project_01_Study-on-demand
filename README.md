@@ -318,9 +318,9 @@
    2. cannot see
       1.  edit and delete buttons for other lecturers ✅
       2.  edit and delete buttons for all students ✅
-3. an admin account
+3. an admin account 
    1. can see
-      1. everything
+      1. everything ✅
 4. how to add the column of courses to teach when a new lecturer signs up ? 
 5. add a `profile` section after a successful login
    1. [FIXED]: pass the id by using the parathesis 
