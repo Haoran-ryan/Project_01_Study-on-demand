@@ -273,6 +273,23 @@
 - `lecturer.rb` : password and authentication 
 - `session` for `lecturers`
 
+
+* adding an `admin` account under the `lecturers` 
+1. command line 
+  ```shell
+    rails g migration add_admin_to_lecturers admin:boolean
+  ```
+2. set the admin default value for the existing lecturers 
+   ```ruby
+    class AddAdminToLecturers < ActiveRecord::Migration[5.2]
+      def change
+        add_column :lecturers, :admin, :boolean, :default => false
+      end
+    end
+   ```
+3. migrate the change 
+4. check admin status globally across the site 
+
 ### Problems and Fixes
 - customized welcome message is not showing in the homepage for `session[:stduent_id]` [FIXED]
   - 1. typo of the action 
@@ -281,7 +298,8 @@
 - error message is not shown for invalid signin [FIXED]
   - `flash[:error]` shall be called in the session new view 
 
-# What to do next? 
+## To-do list
+### 24-01-2023 
 1. a student account:
    1. can see
       1. all courses ✅
@@ -293,13 +311,16 @@
       4. new course ✅ 
 2. a lecturer acccount
    1. can see
-      1. all student 
-      2. all courses
-      3. all lecturers
-      4. new course 
+      1. all student ✅
+      2. all courses ✅
+      3. all lecturers ✅
+      4. new course ✅
    2. cannot see
-      1.  edit and delete buttons for other lecturers 
+      1.  edit and delete buttons for other lecturers ✅
+      2.  edit and delete buttons for all students ✅
 3. an admin account
    1. can see
       1. everything
 4. how to add the column of courses to teach when a new lecturer signs up ? 
+5. add a `profile` section after a successful login
+   1. [FIXED]: pass the id by using the parathesis 

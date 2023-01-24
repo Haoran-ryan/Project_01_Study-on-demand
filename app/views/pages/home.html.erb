@@ -4,7 +4,11 @@
 <% end %>
 
 <% if @current_lecturer.present? %>
-    <p>Welcome back <%=@current_lecturer.name%> </p>
+    <% if @current_lecturer.admin? %>
+        <p>Welcome back <%=@current_lecturer.name%>. You have signed in as an admin. </p>
+    <% else %>
+        <p>Welcome back <%=@current_lecturer.name%> </p>
+    <% end %>
 <% end %>
 
 <p>2 Entery portals would be set up </p>

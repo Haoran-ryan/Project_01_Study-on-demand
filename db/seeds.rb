@@ -22,7 +22,7 @@ puts "#{Course.count} courses"
 
 Lecturer.destroy_all
 l1 = Lecturer.create :name => "Dr Eric Martin", :email => "eric.martin@unsw.edu.au", :image => "https://api.research.unsw.edu.au/sites/default/files/images/profile/Eric_Martin.png", :admin => false, :password => "chicken", :password_confirmation => "chicken"
-l2 = Lecturer.create :name => "Professor Michael Thielscher", :email => "m.thielscher@unsw.edu.au", :image => "https://api.research.unsw.edu.au/sites/default/files/images/profile/photo_3.jpg", :admin => false,:password => "chicken", :password_confirmation => "chicken"
+l2 = Lecturer.create :name => "Professor Michael Thielscher", :email => "m.thielscher@unsw.edu.au", :image => "https://api.research.unsw.edu.au/sites/default/files/images/profile/photo_3.jpg", :admin => false, :password => "chicken", :password_confirmation => "chicken"
 
 puts "#{Lecturer.count} lecturers"
 

@@ -11,7 +11,7 @@
         <li><%= course.name %></li>
         <% end %>
     </li>
-    <% if @current_lecturer.present? %>
+    <% if @current_lecturer.present? && @current_lecturer == @lecturer %>
         <button><%= link_to "Edit", edit_lecturer_path %></button>
     
         <%= button_to "Delete Lecturer", @lecturer, :method =>"delete", :data=> {:confirm => "Are you sure you want to delete #{@lecturer.name}?"} %>

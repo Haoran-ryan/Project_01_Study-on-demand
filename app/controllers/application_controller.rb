@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
     before_action :fetch_student
     before_action :fetch_lecturer
+    
 
     private 
     def fetch_student 
@@ -12,4 +13,8 @@ class ApplicationController < ActionController::Base
         @current_lecturer = Lecturer.find_by :id => session[:lecturer_id] if session[:lecturer_id].present? 
         session[:lecturer_id] = nil unless @current_lecturer.present? 
     end 
+
+    # def check_for_admin
+    #     redirect_to login_path unless (@current_student.present? || (@current_lecturer.present? && current_lecturer.admin?))
+    # end 
 end
