@@ -272,7 +272,6 @@
   ```
 - `lecturer.rb` : password and authentication 
 - `session` for `lecturers`
-  - 
 
 ### Problems and Fixes
 - customized welcome message is not showing in the homepage for `session[:stduent_id]` [FIXED]
@@ -281,3 +280,13 @@
 
 - error message is not shown for invalid signin [FIXED]
   - `flash[:error]` shall be called in the session new view 
+
+# What to do next? 
+1. add an admin account 
+   1. only an admin can see 'all students'
+   2. an admin can 'edit' a student, course and lecturer 
+2. a student can see `all lecturers`
+   1. but he/she cannot see `edit` and `delete` buttons for a lecturer
+3. a student can see `all courses`
+   1. but he/she cannot see `edit` and `delete` buttons for a course
+4. `new course` can only be seen by a lecturer or an admin 

@@ -8,7 +8,7 @@
     
     <li>Courses:
         <% @lecturer.courses.each do |course| %>
-        <li><%= course%></li>
+        <li><%= course.name %></li>
         <% end %>
     </li>
     <button><%= link_to "Edit", edit_lecturer_path %></button>
