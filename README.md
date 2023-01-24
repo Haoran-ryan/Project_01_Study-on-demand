@@ -298,8 +298,7 @@
 - error message is not shown for invalid signin [FIXED]
   - `flash[:error]` shall be called in the session new view 
 
-## To-do list
-### 24-01-2023 
+----------------------------------------------------------------
 1. a student account:
    1. can see
       1. all courses ✅
@@ -324,3 +323,9 @@
 4. how to add the column of courses to teach when a new lecturer signs up ? 
 5. add a `profile` section after a successful login
    1. [FIXED]: pass the id by using the parathesis 
+
+----------------------------------------------------------------
+6. API: gem `initials`
+   1. gemfile and bundle install 
+7. `home.html.erb`: home page revamp
+   1. allowing user to login as a student or a lectuer 

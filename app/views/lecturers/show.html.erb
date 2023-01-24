@@ -1,6 +1,10 @@
 <h1><%= @lecturer.name %></h1>
 
-<%= image_tag @lecturer.image, :class => 'feature' if @lecturer.image.present? %>
+<% if @lecturer.image.present? %>
+<%= image_tag @lecturer.image, :class => 'feature'%>
+<% else %>
+<%= user_avatar(@lecturer.name, shape: :rect, size:96) %>
+<% end %>
 
 <ul>
     <li>Name: <%= @lecturer.name %></li>

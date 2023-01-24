@@ -1,6 +1,11 @@
 <h1><%= @student.name %></h1>
 
-<%= image_tag @student.image, :class => 'feature' if @student.image.present? %>
+<% if @student.image.present? %>
+<%= image_tag @student.image, :class => 'feature'%>
+<% else %>
+<%= user_avatar(@student.name, shape: :rect, size:96) %>
+<% end %>
+
 
 <ul>
     <li>Name: <%= @student.name %></li>
@@ -11,7 +16,7 @@
         <li><%= enrolment.course.name %></li>
         <% end %>
     </li>
-    <% if @current_student.present? && @current_student.name == @student || @current_lecturer.admin? %>
+    <% if (@current_student.present? && @current_student.name == @student) || @current_lecturer.try(:admin?) %>
         <button><%= link_to "Edit", edit_student_path %></button>
         <%= button_to "Delete Student", @student, :method =>"delete", :data=> {:confirm => "Are you sure you want to delete #{@student.name}?"} %>
     <% end %>
