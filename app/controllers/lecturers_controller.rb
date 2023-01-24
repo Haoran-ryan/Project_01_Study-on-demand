@@ -23,7 +23,7 @@ class LecturersController < ApplicationController
     
     def edit
         @lecturer = Lecturer.find(params[:id])
-        if @lecturer.authenticate(params[:id])
+        if @lecturer.authenticate(params[:password])
         end 
     end 
     

@@ -7,6 +7,8 @@
     <li>Introduction: <%= @course.intro %></li>
     
     </li>
-    <button><%= link_to "Edit", edit_course_path %></button>
-    <%= button_to "Delete Course", @course, :method =>"delete", :data=> {:confirm => "Are you sure you want to delete #{@course.name}?"} %>
+    <% if @current_lecturer.present? %>
+        <button><%= link_to "Edit", edit_course_path %></button>
+        <%= button_to "Delete Course", @course, :method =>"delete", :data=> {:confirm => "Are you sure you want to delete #{@course.name}?"} %>
+    <% end %>
 </ul>

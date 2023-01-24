@@ -23,7 +23,7 @@ class StudentsController < ApplicationController
  
   def edit
     @student = Student.find(params[:id])
-    if @student.authenticate(params[:id])
+    if @student.authenticate(params[:password])
       # proceed with the edit action 
     # else 
     #   redirect_to root_path, notice:"Invalid password"

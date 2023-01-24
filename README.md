@@ -282,11 +282,24 @@
   - `flash[:error]` shall be called in the session new view 
 
 # What to do next? 
-1. add an admin account 
-   1. only an admin can see 'all students'
-   2. an admin can 'edit' a student, course and lecturer 
-2. a student can see `all lecturers`
-   1. but he/she cannot see `edit` and `delete` buttons for a lecturer
-3. a student can see `all courses`
-   1. but he/she cannot see `edit` and `delete` buttons for a course
-4. `new course` can only be seen by a lecturer or an admin 
+1. a student account:
+   1. can see
+      1. all courses ✅
+      2. all lecturers ✅
+   2. cannot see
+      1. edit, delete buttons for courses ✅
+      2. edit, delete buttons for lecturers ✅
+      3. all student list ✅ 
+      4. new course ✅ 
+2. a lecturer acccount
+   1. can see
+      1. all student 
+      2. all courses
+      3. all lecturers
+      4. new course 
+   2. cannot see
+      1.  edit and delete buttons for other lecturers 
+3. an admin account
+   1. can see
+      1. everything
+4. how to add the column of courses to teach when a new lecturer signs up ? 

@@ -1,6 +1,6 @@
 Student.destroy_all
-s1 = Student.create :name => "Mark Zuckerberg", :email => "mark.zuckerberg@facebook.com", :image => "https://upload.wikimedia.org/wikipedia/commons/1/18/Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg"
-s2 = Student.create :name => "Bruce Lee", :email => "bruce.lee@gmail.com", :image => "https://upload.wikimedia.org/wikipedia/commons/c/ca/Bruce_Lee_1973.jpg"
+s1 = Student.create :name => "Mark Zuckerberg", :email => "mark.zuckerberg@facebook.com", :image => "https://upload.wikimedia.org/wikipedia/commons/1/18/Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg", :password => "chicken", :password_confirmation => "chicken"
+s2 = Student.create :name => "Bruce Lee", :email => "bruce.lee@gmail.com", :image => "https://upload.wikimedia.org/wikipedia/commons/c/ca/Bruce_Lee_1973.jpg", :password => "chicken", :password_confirmation => "chicken"
 
 puts "#{Student.count} students"
 
@@ -21,8 +21,8 @@ c4 = Course.create :name => "C++", :intro => "C++ is a high-level general-purpos
 puts "#{Course.count} courses"
 
 Lecturer.destroy_all
-l1 = Lecturer.create :name => "Dr Eric Martin", :email => "eric.martin@unsw.edu.au", :image => "https://api.research.unsw.edu.au/sites/default/files/images/profile/Eric_Martin.png", :admin => false 
-l2 = Lecturer.create :name => "Professor Michael Thielscher", :email => "m.thielscher@unsw.edu.au", :image => "https://api.research.unsw.edu.au/sites/default/files/images/profile/photo_3.jpg", :admin => false 
+l1 = Lecturer.create :name => "Dr Eric Martin", :email => "eric.martin@unsw.edu.au", :image => "https://api.research.unsw.edu.au/sites/default/files/images/profile/Eric_Martin.png", :admin => false, :password => "chicken", :password_confirmation => "chicken"
+l2 = Lecturer.create :name => "Professor Michael Thielscher", :email => "m.thielscher@unsw.edu.au", :image => "https://api.research.unsw.edu.au/sites/default/files/images/profile/photo_3.jpg", :admin => false,:password => "chicken", :password_confirmation => "chicken"
 
 puts "#{Lecturer.count} lecturers"
 
