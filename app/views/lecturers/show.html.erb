@@ -15,9 +15,26 @@
         <li><%= course.name %></li>
         <% end %>
     </li>
+
+    <li>Students:
+        <% @lecturer.enrolments.each do |enrolment| %>
+        <li><%= enrolment.student.name %>
+        <%= button_to "Cancel enrolment", enrolment, :method => 'delete' %>
+        </li>
+        <% end %>
+    </li>
+
+    <% if @current_student.present? %>
+        <%= form_for Enrolment.new do |f| %>
+            <%= f.label :course_id, "Courses: " %>
+            <%= f.select :course_id, @lecturer.courses.pluck(:name, :id) %>
+            <%= hidden_field_tag 'enrolment[lecturer_id]', @lecturer.id %>
+            <%= f.submit "Enrol in the course" %>
+        <% end %>
+    <% end %>
+
     <% if @current_lecturer.present? && @current_lecturer == @lecturer %>
-        <button><%= link_to "Edit", edit_lecturer_path %></button>
-    
+        <%= button_to "Edit", edit_lecturer_path, :method => "get" %>
         <%= button_to "Delete Lecturer", @lecturer, :method =>"delete", :data=> {:confirm => "Are you sure you want to delete #{@lecturer.name}?"} %>
     <% end %>
 </ul>

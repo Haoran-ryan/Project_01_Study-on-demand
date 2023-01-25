@@ -21,9 +21,9 @@ c4 = Course.create :name => "C++", :intro => "C++ is a high-level general-purpos
 puts "#{Course.count} courses"
 
 Lecturer.destroy_all
-l1 = Lecturer.create :name => "Dr Eric Martin", :email => "eric.martin@unsw.edu.au", :image => "https://api.research.unsw.edu.au/sites/default/files/images/profile/Eric_Martin.png", :admin => false, :password => "chicken", :password_confirmation => "chicken"
+l1 = Lecturer.create :name => "Dr Eric Martin", :email => "eric.martin@unsw.edu.au", :image => "https://api.research.unsw.edu.au/sites/default/files/images/profile/Eric_Martin.png", :admin => true, :password => "chicken", :password_confirmation => "chicken"
 l2 = Lecturer.create :name => "Professor Michael Thielscher", :email => "m.thielscher@unsw.edu.au", :image => "https://api.research.unsw.edu.au/sites/default/files/images/profile/photo_3.jpg", :admin => false, :password => "chicken", :password_confirmation => "chicken"
-
+l3 = Lecturer.create :name => "Zhengyi Yang", :email => "zhengyi.yang@unsw.edu.au", :image => "https://api.research.unsw.edu.au/sites/default/files/images/profile/bcam0041.jpg", :admin => false, :password => "chicken", :password_confirmation => "chicken"
 puts "#{Lecturer.count} lecturers"
 
 # Associate the data
@@ -33,10 +33,10 @@ s2.enrolments << e3 << e4
 puts "Done 1"
 
 puts "Enrolments and Courses"
-c1.enrolments << e1
-c2.enrolments << e2
-c3.enrolments << e3
-c4.enrolments << e4
+c1.enrolments << e1 
+c2.enrolments << e2 
+c3.enrolments << e3 
+c4.enrolments << e4 
 puts "Done 2"
 
 puts "Courses and Lecturers"
@@ -45,3 +45,9 @@ c2.lecturers << l1 << l2
 c3.lecturers << l1 << l2
 c4.lecturers << l1 << l2
 puts "Done 3"
+
+puts "Lecturers and Enrolments"
+l1.enrolments << e1 << e3
+l2.enrolments << e2 << e4
+l3.enrolments << e1 << e4 
+puts "Done 4"

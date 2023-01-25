@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :students
   resources :lecturers 
   resources :courses
+  resources :enrolments 
 
   get '/login', to: 'session#new'
   post '/login', to: 'session#create'

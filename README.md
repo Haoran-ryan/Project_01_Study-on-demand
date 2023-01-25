@@ -290,16 +290,7 @@
 3. migrate the change 
 4. check admin status globally across the site 
 
-### Problems and Fixes
-- customized welcome message is not showing in the homepage for `session[:stduent_id]` [FIXED]
-  - 1. typo of the action 
-  - 2. the action must be defined in `application_controller.rb`
-
-- error message is not shown for invalid signin [FIXED]
-  - `flash[:error]` shall be called in the session new view 
-
-----------------------------------------------------------------
-1. a student account:
+5. a student account:
    1. can see
       1. all courses ✅
       2. all lecturers ✅
@@ -308,7 +299,7 @@
       2. edit, delete buttons for lecturers ✅
       3. all student list ✅ 
       4. new course ✅ 
-2. a lecturer acccount
+6. a lecturer acccount
    1. can see
       1. all student ✅
       2. all courses ✅
@@ -317,15 +308,68 @@
    2. cannot see
       1.  edit and delete buttons for other lecturers ✅
       2.  edit and delete buttons for all students ✅
-3. an admin account 
+7. an admin account 
    1. can see
       1. everything ✅
-4. how to add the column of courses to teach when a new lecturer signs up ? 
-5. add a `profile` section after a successful login
+8. how to add the column of courses to teach when a new lecturer signs up ? 
+9. add a `profile` section after a successful login
    1. [FIXED]: pass the id by using the parathesis 
 
-----------------------------------------------------------------
-6. API: gem `initials`
+10. API: gem `initials`
    1. gemfile and bundle install 
-7. `home.html.erb`: home page revamp
+11. `home.html.erb`: home page revamp
    1. allowing user to login as a student or a lectuer 
+
+
+### Problems and Fixes
+- customized welcome message is not showing in the homepage for `session[:stduent_id]` [FIXED]
+  - 1. typo of the action 
+  - 2. the action must be defined in `application_controller.rb`
+
+- error message is not shown for invalid signin [FIXED]
+  - `flash[:error]` shall be called in the session new view 
+
+## 25-01-2023
+1. create a form to allow a student to enrol in a course 
+   1. NOTE: a combination of : course + lecturer should be displayed
+   2.  
+    ```shell
+      rails g controller Enrolments --skip-routes
+    ```
+    3. add `lecturer_id` to the enrolment in the models 
+       1. generation and migration required 
+    4. define actions in the enrolment_controller
+       1. ```ruby
+            def index
+                @enrolments = Enrolment.all
+            end 
+
+            def create 
+                enrolment = Enrolment.create enrolment_params 
+                @current_student.enrolments << enrolment
+                redirect_to @current_student
+            end 
+
+            private 
+            def enrolment_params
+                params.require(:enrolment).permit(:course_id, :lecturer_id)
+            end 
+        ```
+      5. create a form to allow a student to enrol in a course
+         1. ```ruby
+            <%= form_for Enrolment.new do |f| %>
+            <%= f.label :lecturer_id %>
+            <%= f.select :lecturer_id, @course.lecturers.pluck(:name, :id) %>
+            <%= hidden_field_tag 'enrolment[course_id]', @course.id %>
+            <%= f.submit %>
+            <% end %>
+          ```
+2. ernolment option can be only seen when a student signs in ✅
+3. a student can only see a course that he/she is not enrolled in ✅
+4. To enrol in a course through a lecturer's profile page ✅
+5. Enrolment option in a lecturer's profile page can be only seen when a student logs in ✅
+6. A lecturer can see who enrols in his/her course 
+7. A lecturere can kick a student from his/her course
+8. if a student enrols in a course that is not assigned to a lecturer, he/she can see a dropdown menu to selezct a lecture ✅
+   1. Better to fix the seed instead of creating this funtionality 
+   

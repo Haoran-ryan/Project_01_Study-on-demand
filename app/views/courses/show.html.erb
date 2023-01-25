@@ -12,3 +12,13 @@
         <%= button_to "Delete Course", @course, :method =>"delete", :data=> {:confirm => "Are you sure you want to delete #{@course.name}?"} %>
     <% end %>
 </ul>
+
+<% if @current_student.present? && !@current_student.enrolments.pluck(:course_id).include?(@course.id) %>
+    <h2>Enrol in the course</h2>
+    <%= form_for Enrolment.new do |f| %>
+        <%= f.label :lecturer_id, "Lecturer: " %>
+        <%= f.select :lecturer_id, @course.lecturers.pluck(:name, :id) %>
+        <%= hidden_field_tag 'enrolment[course_id]', @course.id %>
+        <%= f.submit %>
+    <% end %>
+<% end %>

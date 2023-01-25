@@ -14,6 +14,7 @@
     <li>Enrolments:
         <% @student.enrolments.each do |enrolment| %>
         <li><%= enrolment.course.name %></li>
+        <li><%= enrolment.lecturer.name unless enrolment.lecturer.nil? %></li>
         <% end %>
     </li>
     <% if (@current_student.present? && @current_student.name == @student) || @current_lecturer.try(:admin?) %>
