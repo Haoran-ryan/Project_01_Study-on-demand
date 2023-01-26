@@ -1,4 +1,5 @@
-<% if @student.errors.any? %>
+<p>
+    <% if @student.errors.any? %>
     <ol>
         <% @student.errors.full_messages.each do |msg| %>
             <li>
@@ -6,24 +7,28 @@
             </li>
         <% end %>
     </ol>
-<% end %>
+    <% end %>
+</p>
+
 
 <%= form_for @student do |f| %>
-    <%=f.label :name, "Name" %>
-    <%= f.text_field :name %>
+    <%=f.label :name, "Name", :class =>'form-label' %>
+    <%= f.text_field :name, :class => 'form-control' %>
 
-    <%=f.label :email, "Email"%>
-    <%= f.text_field :email %>
+    <%=f.label :email, "Email", :class =>'form-label'%>
+    <%= f.text_field :email, :class => 'form-control' %>
 
     <%= f.label :image %>
-    <%= f.url_field :image, placeholder: "Auto Avatar Creation" %>
+    <%= f.url_field :image, placeholder: "Auto Avatar Creation", :class =>'form-label' %>
 
-    <%= f.label :password  %>
-    <%= f.password_field :password %>
+    <%= f.label :password, :class =>'form-label'  %>
+    <%= f.password_field :password, :class => 'form-control' %>
 
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
+    <%= f.label :password_confirmation, :class =>'form-label' %>
+    <%= f.password_field :password_confirmation, :class => 'form-control' %>
 
-    <br />
-    <%= f.submit %>
+    
+    <%= f.submit "Submit", :class => 'btn btn-danger btn-lg' %>
 <% end %>
+
+

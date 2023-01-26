@@ -368,8 +368,11 @@
 3. a student can only see a course that he/she is not enrolled in ✅
 4. To enrol in a course through a lecturer's profile page ✅
 5. Enrolment option in a lecturer's profile page can be only seen when a student logs in ✅
-6. A lecturer can see who enrols in his/her course 
-7. A lecturere can kick a student from his/her course
+6. A lecturer can see who enrols in his/her course ✅
+7. A lecturere can kick a student from his/her course ✅
 8. if a student enrols in a course that is not assigned to a lecturer, he/she can see a dropdown menu to selezct a lecture ✅
    1. Better to fix the seed instead of creating this funtionality 
+
+## 26-01-2026
+1. Bootstrap installation 
    

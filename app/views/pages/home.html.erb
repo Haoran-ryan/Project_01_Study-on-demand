@@ -11,17 +11,3 @@
     <% end %>
 <% end %>
 
-
-<h2>Creating a form to allow a user choose which portal to sign up</h2>
-<%= form_tag do %>
-    <%= select_tag :options, options_for_select(["Student Sign Up", "Lecturer Sign Up"]) %>
-    <%= submit_tag "Sign Up" %>
-<% end %>
-
-<div id="form1" style="">
-    <%= render :partial => "students/form" %>
-</div>
-
-<div id="form2" style="">
-    <%= render :partial => "lecturers/form" %>
-</div>
