@@ -1,24 +1,41 @@
-<h1><%= @student.name %></h1>
-
-<% if @student.image.present? %>
-<%= image_tag @student.image, :class => 'feature'%>
-<% else %>
-<%= user_avatar(@student.name, shape: :rect, size:96) %>
-<% end %>
-
-
-<ul>
-    <li>Name: <%= @student.name %></li>
-    <li>Email: <%= @student.email %></li>
-    
-    <li>Enrolments:
-        <% @student.enrolments.each do |enrolment| %>
-        <li><%= enrolment.course.name %></li>
-        <li><%= enrolment.lecturer.name unless enrolment.lecturer.nil? %></li>
-        <% end %>
-    </li>
-    <% if (@current_student.present? && @current_student.name == @student) || @current_lecturer.try(:admin?) %>
-        <button><%= link_to "Edit", edit_student_path %></button>
-        <%= button_to "Delete Student", @student, :method =>"delete", :data=> {:confirm => "Are you sure you want to delete #{@student.name}?"} %>
+<div class="row">
+  <div class="col-md-4">
+    <% if @student.image.present? %>
+      <%= image_tag @student.image, class: 'img-fluid rounded mb-3', alt: @student.name %>
+    <% else %>
+      <div class="mb-3">
+        <%= user_avatar(@student.name, shape: :rect, size: 200, class: 'img-fluid rounded') %>
+      </div>
     <% end %>
-</ul>
+
+    <% if (@current_student.present? && @current_student == @student) || @current_lecturer.try(:admin?) %>
+      <div class="d-grid gap-2">
+        <%= link_to "Edit Profile", edit_student_path(@student), class: 'btn btn-primary mb-2' %>
+        <%= button_to "Delete Student", @student, method: :delete, data: { confirm: "Are you sure you want to delete #{@student.name}?" }, class: 'btn btn-danger' %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-md-8">
+    <h1 class="display-5"><%= @student.name %></h1>
+    <p class="lead"><strong>Email:</strong> <%= @student.email %></p>
+
+    <hr class="my-4">
+
+    <h4>Enrolments</h4>
+    <% if @student.enrolments.any? %>
+      <ul class="list-group">
+        <% @student.enrolments.each do |enrolment| %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <%= link_to enrolment.course.name, course_path(enrolment.course) %>
+            <span class="badge bg-secondary rounded-pill">
+              Lecturer: <%= enrolment.lecturer.name if enrolment.lecturer.present? %>
+            </span>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-muted">No enrolments yet.</p>
+    <% end %>
+  </div>
+</div>

@@ -1,29 +1,39 @@
 <% if @lecturer.errors.any? %>
-    <ol>
-        <% @lecturer.errors.full_messages.each do |msg| %>
-            <li>
-                <%= msg %>
-            </li>
-        <% end %>
-    </ol>
+  <div class="alert alert-danger">
+    <h5><%= pluralize(@lecturer.errors.count, "error") %> prohibited this lecturer from being saved:</h5>
+    <ul>
+      <% @lecturer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>
 
 <%= form_for @lecturer do |f| %>
-    <%=f.label :name, "Name" %>
-    <%= f.text_field :name %>
+  <div class="form-group mb-3">
+    <%= f.label :name, "Name", class: 'form-label' %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
 
-    <%=f.label :email, "Email"%>
-    <%= f.text_field :email %>
+  <div class="form-group mb-3">
+    <%= f.label :email, "Email", class: 'form-label' %>
+    <%= f.text_field :email, class: 'form-control' %>
+  </div>
 
-    <%= f.label :image %>
-    <%= f.url_field :image, placeholder: "Auto Avatar Creation" %>
+  <div class="form-group mb-3">
+    <%= f.label :image, class: 'form-label' %>
+    <%= f.url_field :image, placeholder: "Enter image URL or leave blank for auto-avatar", class: 'form-control' %>
+  </div>
 
-    <%= f.label :password  %>
-    <%= f.password_field :password %>
+  <div class="form-group mb-3">
+    <%= f.label :password, class: 'form-label' %>
+    <%= f.password_field :password, class: 'form-control' %>
+  </div>
 
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
+  <div class="form-group mb-3">
+    <%= f.label :password_confirmation, class: 'form-label' %>
+    <%= f.password_field :password_confirmation, class: 'form-control' %>
+  </div>
 
-    <br />
-    <%= f.submit %>
+  <%= f.submit "Submit", class: 'btn btn-primary btn-lg' %>
 <% end %>

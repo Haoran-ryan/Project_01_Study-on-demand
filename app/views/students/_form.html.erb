@@ -1,34 +1,41 @@
-<p>
-    <% if @student.errors.any? %>
-    <ol>
-        <% @student.errors.full_messages.each do |msg| %>
-            <li>
-                <%= msg %>
-            </li>
-        <% end %>
-    </ol>
-    <% end %>
-</p>
-
+<% if @student.errors.any? %>
+  <div class="alert alert-danger">
+    <h5><%= pluralize(@student.errors.count, "error") %> prohibited this student from being saved:</h5>
+    <ul>
+      <% @student.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
 <%= form_for @student do |f| %>
-    <%=f.label :name, "Name", :class =>'form-label' %>
-    <%= f.text_field :name, :class => 'form-control' %>
+  <div class="form-group mb-3">
+    <%= f.label :name, "Name", class: 'form-label' %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
 
-    <%=f.label :email, "Email", :class =>'form-label'%>
-    <%= f.text_field :email, :class => 'form-control' %>
+  <div class="form-group mb-3">
+    <%= f.label :email, "Email", class: 'form-label' %>
+    <%= f.text_field :email, class: 'form-control' %>
+  </div>
 
-    <%= f.label :image %>
-    <%= f.url_field :image, placeholder: "Auto Avatar Creation", :class =>'form-label' %>
+  <div class="form-group mb-3">
+    <%= f.label :image, class: 'form-label' %>
+    <%= f.url_field :image, placeholder: "Enter image URL or leave blank for auto-avatar", class: 'form-control' %>
+  </div>
 
-    <%= f.label :password, :class =>'form-label'  %>
-    <%= f.password_field :password, :class => 'form-control' %>
+  <div class="form-group mb-3">
+    <%= f.label :password, class: 'form-label' %>
+    <%= f.password_field :password, class: 'form-control' %>
+  </div>
 
-    <%= f.label :password_confirmation, :class =>'form-label' %>
-    <%= f.password_field :password_confirmation, :class => 'form-control' %>
+  <div class="form-group mb-3">
+    <%= f.label :password_confirmation, class: 'form-label' %>
+    <%= f.password_field :password_confirmation, class: 'form-control' %>
+  </div>
 
-    
-    <%= f.submit "Submit", :class => 'btn btn-danger btn-lg' %>
+  <%= f.submit "Submit", class: 'btn btn-primary btn-lg' %>
 <% end %>
 
 

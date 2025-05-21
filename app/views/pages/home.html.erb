@@ -1,13 +1,17 @@
-<h1>Home Page</h1>
+<div class="jumbotron">
+  <h1 class="display-4">Welcome to StudyOnDemand</h1>
+  <p class="lead">Your platform for learning and teaching.</p>
+</div>
+
 <% if @current_student.present? %>
-    <p>Welcome back <%=@current_student.name%> </p>
+    <p class="alert alert-info">Welcome back, <%= @current_student.name %>!</p>
 <% end %>
 
 <% if @current_lecturer.present? %>
     <% if @current_lecturer.admin? %>
-        <p>Welcome back <%=@current_lecturer.name%>. You have signed in as an admin. </p>
+        <p class="alert alert-success">Welcome back, <%= @current_lecturer.name %>. You have signed in as an admin.</p>
     <% else %>
-        <p>Welcome back <%=@current_lecturer.name%> </p>
+        <p class="alert alert-info">Welcome back, <%= @current_lecturer.name %>!</p>
     <% end %>
 <% end %>
 

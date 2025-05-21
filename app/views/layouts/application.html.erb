@@ -13,7 +13,7 @@
   <body>
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#"> Nav </a>
+    <a class="navbar-brand" href="<%= pages_home_path %>">StudyOnDemand</a>
     
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -67,7 +67,17 @@
         </ul>
       </div>
     </nav>
-     <%= yield %>
+    <div class="row">
+      <div class="col">
+        <%= yield %>
+      </div>
+    </div>
   </div>
+
+  <footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+      <span class="text-muted">© <%= Time.now.year %> StudyOnDemand</span>
+    </div>
+  </footer>
   </body>
 </html>

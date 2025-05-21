@@ -13,7 +13,7 @@
 //= require rails-ujs
 
 //= require jquery
-//= reuiqre popper 
+//= require popper
 //= require bootstrap-sprockets
 //= require_tree.
 

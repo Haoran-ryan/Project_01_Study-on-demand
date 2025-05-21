@@ -1,40 +1,70 @@
-<h1><%= @lecturer.name %></h1>
-
-<% if @lecturer.image.present? %>
-<%= image_tag @lecturer.image, :class => 'feature'%>
-<% else %>
-<%= user_avatar(@lecturer.name, shape: :rect, size:96) %>
-<% end %>
-
-<ul>
-    <li>Name: <%= @lecturer.name %></li>
-    <li>Email: <%= @lecturer.email %></li>
-    
-    <li>Courses:
-        <% @lecturer.courses.each do |course| %>
-        <li><%= course.name %></li>
-        <% end %>
-    </li>
-
-    <li>Students:
-        <% @lecturer.enrolments.each do |enrolment| %>
-        <li><%= enrolment.student.name %>
-        <%= button_to "Cancel enrolment", enrolment, :method => 'delete' %>
-        </li>
-        <% end %>
-    </li>
-
-    <% if @current_student.present? %>
-        <%= form_for Enrolment.new do |f| %>
-            <%= f.label :course_id, "Courses: " %>
-            <%= f.select :course_id, @lecturer.courses.pluck(:name, :id) %>
-            <%= hidden_field_tag 'enrolment[lecturer_id]', @lecturer.id %>
-            <%= f.submit "Enrol in the course" %>
-        <% end %>
+<div class="row">
+  <div class="col-md-4">
+    <% if @lecturer.image.present? %>
+      <%= image_tag @lecturer.image, class: 'img-fluid rounded mb-3', alt: @lecturer.name %>
+    <% else %>
+      <div class="mb-3">
+        <%= user_avatar(@lecturer.name, shape: :rect, size: 200, class: 'img-fluid rounded') %>
+      </div>
     <% end %>
 
     <% if @current_lecturer.present? && @current_lecturer == @lecturer %>
-        <%= button_to "Edit", edit_lecturer_path, :method => "get" %>
-        <%= button_to "Delete Lecturer", @lecturer, :method =>"delete", :data=> {:confirm => "Are you sure you want to delete #{@lecturer.name}?"} %>
+      <div class="d-grid gap-2">
+        <%= link_to "Edit Profile", edit_lecturer_path(@lecturer), class: 'btn btn-primary mb-2' %>
+        <%= button_to "Delete Lecturer", @lecturer, method: :delete, data: { confirm: "Are you sure you want to delete #{@lecturer.name}?" }, class: 'btn btn-danger' %>
+      </div>
     <% end %>
-</ul>
+  </div>
+
+  <div class="col-md-8">
+    <h1 class="display-5"><%= @lecturer.name %></h1>
+    <p class="lead"><strong>Email:</strong> <%= @lecturer.email %></p>
+
+    <hr class="my-4">
+
+    <h4>Courses Taught</h4>
+    <% if @lecturer.courses.any? %>
+      <ul class="list-group mb-3">
+        <% @lecturer.courses.each do |course| %>
+          <li class="list-group-item"><%= link_to course.name, course_path(course) %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-muted">Not teaching any courses yet.</p>
+    <% end %>
+
+    <h4>Enrolled Students</h4>
+    <% if @lecturer.enrolments.any? %>
+      <ul class="list-group mb-3">
+        <% @lecturer.enrolments.each do |enrolment| %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <%= link_to enrolment.student.name, student_path(enrolment.student) %>
+            <% if @current_lecturer.present? && (@current_lecturer == @lecturer || @current_lecturer.admin?) %>
+              <%= button_to "Cancel Enrolment", enrolment_path(enrolment), method: :delete, class: 'btn btn-sm btn-outline-danger' %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="text-muted">No students enrolled in this lecturer's courses.</p>
+    <% end %>
+
+    <% if @current_student.present? && @lecturer.courses.any? %>
+      <div class="card mt-4">
+        <div class="card-body">
+          <h5 class="card-title">Enrol in a Course</h5>
+          <%= form_for Enrolment.new do |f| %>
+            <div class="form-group mb-3">
+              <%= f.label :course_id, "Select Course", class: 'form-label' %>
+              <%= f.select :course_id, @lecturer.courses.pluck(:name, :id), {}, { class: 'form-select' } %>
+              <%= hidden_field_tag 'enrolment[lecturer_id]', @lecturer.id %>
+            </div>
+            <%= f.submit "Enrol", class: 'btn btn-success' %>
+          <% end %>
+        </div>
+      </div>
+    <% elsif @current_student.present? && @lecturer.courses.empty? %>
+        <p class="alert alert-warning">This lecturer is not currently offering any courses for enrolment.</p>
+    <% end %>
+  </div>
+</div>
