@@ -1,13 +1,29 @@
+<% if @course.errors.any? %>
+  <div class="alert alert-danger">
+    <h5><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h5>
+    <ul>
+      <% @course.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_for @course do |f| %>
-    <%=f.label :name, "Course Name" %>
-    <%= f.text_field :name %>
+  <div class="form-group mb-3">
+    <%= f.label :name, "Course Name", class: 'form-label' %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
 
-    <%=f.label :intro, "Course Intro"%>
-    <%= f.text_field :intro %>
+  <div class="form-group mb-3">
+    <%= f.label :intro, "Course Introduction", class: 'form-label' %>
+    <%= f.text_area :intro, class: 'form-control', rows: 3 %>
+  </div>
 
-    <%= f.label :image %>
-    <%= f.url_field :image %>
+  <div class="form-group mb-3">
+    <%= f.label :image, "Course Image URL", class: 'form-label' %>
+    <%= f.url_field :image, class: 'form-control', placeholder: 'http://example.com/image.jpg' %>
+  </div>
 
-    <br />
-    <%= f.submit %>
+  <%= f.submit "Submit Course", class: 'btn btn-primary btn-lg' %>
 <% end %>

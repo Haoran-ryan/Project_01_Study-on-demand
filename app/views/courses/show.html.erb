@@ -1,24 +1,74 @@
-<h1><%= @course.name %></h1>
+<div class="row">
+  <div class="col-md-8">
+    <h1 class="display-4"><%= @course.name %></h1>
+    <p class="lead"><%= @course.intro %></p>
 
-<%= image_tag @course.image, :class => 'feature' if @course.image.present? %>
-
-<ul>
-    <li>Name: <%= @course.name %></li>
-    <li>Introduction: <%= @course.intro %></li>
-    
-    </li>
-    <% if @current_lecturer.present?  %>
-        <button><%= link_to "Edit", edit_course_path %></button>
-        <%= button_to "Delete Course", @course, :method =>"delete", :data=> {:confirm => "Are you sure you want to delete #{@course.name}?"} %>
+    <% if @course.image.present? %>
+      <%= image_tag @course.image, class: 'img-fluid rounded mb-3 shadow-sm', alt: @course.name %>
     <% end %>
-</ul>
 
-<% if @current_student.present? && !@current_student.enrolments.pluck(:course_id).include?(@course.id) %>
-    <h2>Enrol in the course</h2>
-    <%= form_for Enrolment.new do |f| %>
-        <%= f.label :lecturer_id, "Lecturer: " %>
-        <%= f.select :lecturer_id, @course.lecturers.pluck(:name, :id) %>
-        <%= hidden_field_tag 'enrolment[course_id]', @course.id %>
-        <%= f.submit %>
+    <% if @current_lecturer.present? && @course.lecturers.include?(@current_lecturer) %>
+      <div class="my-3">
+        <%= link_to "Edit Course", edit_course_path(@course), class: 'btn btn-warning me-2' %>
+        <%= button_to "Delete Course", @course, method: :delete, data: { confirm: "Are you sure you want to delete #{@course.name}?" }, class: 'btn btn-danger' %>
+      </div>
     <% end %>
+  </div>
+
+  <div class="col-md-4">
+    <div class="card mb-3">
+      <div class="card-header">
+        <h5>Lecturers</h5>
+      </div>
+      <% if @course.lecturers.any? %>
+        <ul class="list-group list-group-flush">
+          <% @course.lecturers.each do |lecturer| %>
+            <li class="list-group-item"><%= link_to lecturer.name, lecturer_path(lecturer) %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <div class="card-body">
+          <p class="card-text text-muted">No lecturers currently assigned to this course.</p>
+        </div>
+      <% end %>
+    </div>
+
+    <% if @current_student.present? && !@current_student.enrolments.pluck(:course_id).include?(@course.id) %>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Enrol in this Course</h5>
+          <% if @course.lecturers.any? %>
+            <%= form_for Enrolment.new do |f| %>
+              <div class="form-group mb-3">
+                <%= f.label :lecturer_id, "Choose a Lecturer", class: 'form-label' %>
+                <%= f.select :lecturer_id, @course.lecturers.pluck(:name, :id), {}, { class: 'form-select' } %>
+                <%= hidden_field_tag 'enrolment[course_id]', @course.id %>
+              </div>
+              <%= f.submit "Enrol", class: 'btn btn-success w-100' %>
+            <% end %>
+          <% else %>
+            <p class="alert alert-warning">Cannot enrol: No lecturers are currently assigned to this course.</p>
+          <% end %>
+        </div>
+      </div>
+    <% elsif @current_student.present? && @current_student.enrolments.pluck(:course_id).include?(@course.id) %>
+        <div class="alert alert-info">You are already enrolled in this course.</div>
+    <% end %>
+  </div>
+</div>
+
+<hr class="my-4">
+
+<h4>Enrolled Students</h4>
+<% if @course.enrolments.any? %>
+  <ul class="list-group">
+    <% @course.enrolments.each do |enrolment| %>
+      <li class="list-group-item">
+        <%= link_to enrolment.student.name, student_path(enrolment.student) %>
+         (Lecturer: <%= link_to enrolment.lecturer.name, lecturer_path(enrolment.lecturer) if enrolment.lecturer.present? %>)
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="text-muted">No students are currently enrolled in this course.</p>
 <% end %>

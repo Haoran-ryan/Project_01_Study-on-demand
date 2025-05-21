@@ -1,12 +1,21 @@
-<h1>All Students</h1>
+<h1 class="mb-4">All Students</h1>
 
-<% @students.each do |student|%>
-    <p>
-        <%= image_tag student.image, :class =>'thumb student_image' if student.image.present? %>
-        <ul>
-            <li>Name: <%= link_to student.name, student %></li>
-            <li>Email: <%= student.email %></li>
-        </ul>
-    </p>
-<% end %>
+<div class="row">
+  <% @students.each do |student| %>
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <% if student.image.present? %>
+          <%= image_tag student.image, class: 'card-img-top img-thumbnail', alt: student.name %>
+        <% else %>
+          <%= image_tag 'https://via.placeholder.com/150', class: 'card-img-top img-thumbnail', alt: 'Placeholder Image' %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to student.name, student, class: 'card-link' %></h5>
+          <p class="card-text"><%= student.email %></p>
+          <%= link_to 'View Profile', student_path(student), class: 'btn btn-sm btn-outline-primary' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 
